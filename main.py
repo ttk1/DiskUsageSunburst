@@ -6,9 +6,9 @@ import time
 from plotly import graph_objects as go
 
 
-values = []
 labels = []
 parents = []
+values = []
 
 
 def f(current, parent):
@@ -42,9 +42,9 @@ if __name__ == '__main__':
 
     trace = go.Sunburst(
         name='',
-        values=values,
         labels=labels,
         parents=parents,
+        values=values,
         hovertemplate=(
             '<b>%{label}</b><br>'
             'size: %{value:.2f} GiB<br>'
