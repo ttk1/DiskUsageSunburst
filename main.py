@@ -13,22 +13,19 @@ parents = []
 
 def f(current, parent):
     total = 0
-
-    try:
-        children = os.scandir(current)
-    except:
+    if os.path.islink(current):
         return 0
-
-    for child in children:
-        if child.is_file(follow_symlinks=False):
-            try:
-                total += os.path.getsize(child.path)
-            except:
-                pass
-        elif child.is_dir(follow_symlinks=False):
+    elif os.path.isfile(current):
+        total = os.path.getsize(current)
+    else:
+        try:
+            children = os.scandir(current)
+        except:
+            return 0
+        for child in children:
             total += f(child.path, current)
 
-    # 数が多いと激重なので、100 MiB以下のフォルダは表示しない
+    # 数が多いと激重なので、100 MiB以下のファイル・フォルダは表示しない
     if total > 100 * 1024 ** 2:
         values.append(total / 1024 ** 3)
         labels.append(current)
