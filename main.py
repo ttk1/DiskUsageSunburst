@@ -27,9 +27,9 @@ def f(current, parent):
 
     # 数が多いと激重なので、100 MiB以下のファイル・フォルダは表示しない
     if total > 100 * 1024 ** 2:
-        values.append(total / 1024 ** 3)
         labels.append(current)
         parents.append(parent)
+        values.append(total / 1024 ** 3)
 
     return total
 
